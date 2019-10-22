@@ -49,7 +49,7 @@ def crawl():
     if len(queued_links)>0:
         print(len(queued_links),' links in the queue.')
         create_jobs()
-
+        
 
 
 create_workers()

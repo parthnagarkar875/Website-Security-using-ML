@@ -18,7 +18,7 @@ df= pd.read_csv(path,encoding = 'unicode_escape',names=['urls'])
 
 '''
 
-def pred():
+def pred(url):
     protocol = []
     domain = []
     path = []
@@ -37,26 +37,26 @@ def pred():
     age_domain = []
     http_tokens = []
 
-    arr=df['urls']
+#    arr=df['urls']
     a=Hello()
-    for url in arr:
-        print(url)
-        protocol.append(a.getProtocol(url))
-        path.append(a.getPath(url))
-        having_ip.append(a.having_ip_address(url))
-        domain.append(a.getDomain(url))
-        len_url.append(a.url_length(url))
-        having_at_symbol.append(a.check_at(url))
-        redirection_symbol.append(a.redirection(url))
-        prefix_suffix_separation.append(a.check_dash(url))
-        sub_domains.append(a.check_dots(url))
-        tiny_url.append(a.shortening_service(url))
-        web_traffic.append(a.web_traffic(url))
-        domain_registration_length.append(a.check_date(url))
-        dns_record.append(a.check_dns(url))
-        statistical_report.append(a.statistical_report(url))
-        age_domain.append(a.check_age(url))
-        http_tokens.append(a.https_token(url))
+    #for url in arr:
+    print(url)
+    protocol.append(a.getProtocol(url))
+    path.append(a.getPath(url))
+    having_ip.append(a.having_ip_address(url))
+    domain.append(a.getDomain(url))
+    len_url.append(a.url_length(url))
+    having_at_symbol.append(a.check_at(url))
+    redirection_symbol.append(a.redirection(url))
+    prefix_suffix_separation.append(a.check_dash(url))
+    sub_domains.append(a.check_dots(url))
+    tiny_url.append(a.shortening_service(url))
+    web_traffic.append(a.web_traffic(url))
+    domain_registration_length.append(a.check_date(url))
+    dns_record.append(a.check_dns(url))
+    statistical_report.append(a.statistical_report(url))
+    age_domain.append(a.check_age(url))
+    http_tokens.append(a.https_token(url))
             
             
     d={'Having_IP':pd.Series(having_ip),'URL_length':pd.Series(len_url),'@':pd.Series(having_at_symbol),
@@ -78,4 +78,4 @@ def pred():
         
     x_pred=classifier.predict(abc)
     print(x_pred)
-pred()
+#pred()
