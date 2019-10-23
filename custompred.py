@@ -12,11 +12,11 @@ arr=np.array(['https://github.com/VirtualGoat/Malevolent-URL-detection-using-Mac
 
 x=arr['url'][:50]
 
-
+'''
 path='test'+'/crawled.txt'
 df= pd.read_csv(path,encoding = 'unicode_escape',names=['urls'])
 
-'''
+
 
 def pred(url):
     protocol = []
@@ -60,8 +60,8 @@ def pred(url):
             
             
     d={'Having_IP':pd.Series(having_ip),'URL_length':pd.Series(len_url),'@':pd.Series(having_at_symbol),
-           'Redirection':pd.Series(redirection_symbol),'Prefix_Suffix_separation':pd.Series(prefix_suffix_separation),
-           'SubDomains':pd.Series(sub_domains),'tiny_url':pd.Series(tiny_url),
+       'Redirection':pd.Series(redirection_symbol),'Prefix_Suffix_separation':pd.Series(prefix_suffix_separation),
+       'SubDomains':pd.Series(sub_domains),'tiny_url':pd.Series(tiny_url),
            'Web traffic':pd.Series(web_traffic),
            'Domain_length':pd.Series(domain_registration_length),'DNS record':pd.Series(dns_record),
            'statistical_report':pd.Series(statistical_report),'Domain Age':pd.Series(age_domain),
@@ -71,11 +71,11 @@ def pred(url):
 
     abc=finaldata.iloc[:,:].values
 
-    file= 'saved_features/saved_features.pkl'
+    file= 'saved_features.pkl'
     with open(file,'rb') as f:
         classifier=pickle.load(f)
         f.close()
         
     x_pred=classifier.predict(abc)
     print(x_pred)
-#pred()
+pred('https://parthnagarkar.000webhostapp.com/')
