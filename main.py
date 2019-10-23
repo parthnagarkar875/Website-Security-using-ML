@@ -22,6 +22,7 @@ sp=DOMAIN_NAME.split('.')
 PROJECT_NAME=sp[0]
 QUEUE_FILE=PROJECT_NAME+"/queue.txt"
 CRAWLED_FILE=PROJECT_NAME+"/crawled.txt"
+DEFECT_FILE=PROJECT_NAME+"/defect.txt"
 NUMBER_OF_THREADS=8
 queue=Queue()
 Spider(PROJECT_NAME,HOMEPAGE,DOMAIN_NAME)
@@ -54,26 +55,4 @@ def crawl():
 
 create_workers()
 crawl()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

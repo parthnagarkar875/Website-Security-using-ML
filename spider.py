@@ -19,10 +19,11 @@ class Spider:
     domain_name=''
     queue_file=''    #indicates the path of the queue file
     crawled_file=''  #indicates the path of the crawled file
+    defect_file=''
     queue=set()
     crawled=set()
     #We have used sets to enable faster access to the memory. 
-    
+    defect=set()
     
     def __init__(self,project_name,base_url,domain_name):
         Spider.project_name=project_name
@@ -30,6 +31,7 @@ class Spider:
         Spider.domain_name=domain_name
         Spider.queue_file=Spider.project_name+"/queue.txt"     #file address appending
         Spider.crawled_file=Spider.project_name+"/crawled.txt" 
+        Spider.defect_file=Spider.project_name+"/defect.txt"
         self.boot()
         self.crawl_page("First Spider",Spider.base_url)
         
@@ -45,6 +47,7 @@ class Spider:
         create_project_file(Spider.project_name,Spider.base_url)
         Spider.queue=file_to_set(Spider.queue_file)
         Spider.crawled=file_to_set(Spider.crawled_file)
+        #Spider.defect=file_to_set(Spider.defect_file)
     
     @staticmethod
     def pred(url):
@@ -106,7 +109,10 @@ class Spider:
             f.close()
             
         x_pred=classifier.predict(abc)
-        print("The prediction is: ",x_pred)
+        if x_pred[0]==1:
+            Spider.defect.add(url)
+        
+        #print("The prediction is: ",x_pred)
     
     
     @staticmethod
@@ -118,8 +124,8 @@ class Spider:
                 Spider.add_links_to_queue(Spider.gather_link(page_url))
                 Spider.queue.remove(page_url)
                 Spider.crawled.add(page_url)
-                Spider.update_files()
                 Spider.pred(page_url)                                
+                Spider.update_files()
             except Exception as e:
                 print(str(e))
     @staticmethod
@@ -165,7 +171,7 @@ class Spider:
     def update_files():
         set_to_file(Spider.queue_file,Spider.queue)
         set_to_file(Spider.crawled_file,Spider.crawled)
-        
+        set_to_file(Spider.defect_file,Spider.defect)    
     
     
     
