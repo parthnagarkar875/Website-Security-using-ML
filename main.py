@@ -17,6 +17,7 @@ variables.
 '''
 #PROJECT_NAME='test'
 HOMEPAGE=input("Enter the URL of the website: ")
+
 DOMAIN_NAME=get_domain_name(HOMEPAGE)
 sp=DOMAIN_NAME.split('.')
 PROJECT_NAME=sp[0]
@@ -26,7 +27,7 @@ DEFECT_FILE=PROJECT_NAME+"/defect.txt"
 NUMBER_OF_THREADS=8
 queue=Queue()
 Spider(PROJECT_NAME,HOMEPAGE,DOMAIN_NAME)
-      
+
 def create_workers():
     for _ in range(NUMBER_OF_THREADS):
         t=threading.Thread(target=work)     #target specifies the function the threads will work/execute on. 
@@ -50,9 +51,11 @@ def crawl():
     if len(queued_links)>0:
         print(len(queued_links),' links in the queue.')
         create_jobs()
-        
+
 
 
 create_workers()
 crawl()
+
+
 
